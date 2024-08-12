@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/teacher.css">
+
+</head>
+<body>
+    <header>
+        <h1>Best University</h1>
+    </header>
+    <div class="container">
+
+        <h2>Teacher Registration</h2>
+
+        <form action="http://localhost/University-Project/Stand_ford/php/teacher/teacher_register.php" method="post">
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="qualifications">Qualifications:</label>
+            <textarea id="qualifications" name="qualifications" required></textarea>
+
+            <label for="experience">Experience (in years):</label>
+            <input type="number" id="experience" name="experience" required>
+
+            <div class="form-group">
+                <label for="degree">Select Degree</label>
+                <select id="degree" name="degree" required>
+                    <option value="">--Select Degree--</option>
+                    <option value="CS">Computer Science - CS</option>
+                    <option value="Eng">Engineering - Eng</option>
+                    <option value="BBA">Business Administration - BBA</option>
+                    <option value="HC">Healthcare - HC</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subjects">Subjects</label>
+                <select id="subjects" name="subjects[]" multiple required></select>
+            </div>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" required>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('degree').addEventListener('change', function() {
+    const subjectsSelect = document.getElementById('subjects');
+    subjectsSelect.innerHTML = ''; // Clear previous options
+
+    const subjects = {
+
+        'CS': [
+            'Data Structures and Algorithms',
+            'Operating Systems',
+            'Computer Networks',
+            'Database Systems',
+            'Software Engineering',
+            'Artificial Intelligence',
+            'Cybersecurity',
+            'Web Development'
+        ],
+        'Eng': [
+            'Mechanics',
+            'Thermodynamics',
+            'Electrical Circuits',
+            'Structural Analysis',
+            'Fluid Dynamics',
+            'Materials Science',
+            'Control Systems',
+            'Engineering Design and Innovation'
+        ],
+        'BBA': [
+            'Accounting',
+            'Economics',
+            'Marketing Management',
+            'Financial Management',
+            'Organizational Behavior',
+            'Business Law',
+            'Operations Management',
+            'Strategic Management'
+        ],
+        'HC': [
+            'Anatomy and Physiology',
+            'Pharmacology',
+            'Medical Ethics',
+            'Healthcare Management',
+            'Epidemiology',
+            'Patient Care and Clinical Skills',
+            'Healthcare Informatics',
+            'Public Health Policy and Administration'
+        ]
+    };
+
+    const selectedDegree = this.value;
+    if (subjects[selectedDegree]) {
+        subjects[selectedDegree].forEach(subject => {
+            const option = document.createElement('option');
+            option.value = subject;
+            option.text = subject;
+            subjectsSelect.appendChild(option);
+        });
+    }
+});
+
+    </script>
+</body>
+</html>

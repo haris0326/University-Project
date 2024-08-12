@@ -1,0 +1,73 @@
+CREATE DATABASE IF NOT EXISTS stand_ford;
+
+USE stand_ford;
+
+CREATE TABLE IF NOT EXISTS student (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    marks_in_matriculation INT,
+    marks_in_intermediate INT,
+    course VARCHAR(50),
+    address VARCHAR(255),
+    password VARCHAR(255),
+    is_approved TINYINT(1),
+    merit_percentage DECIMAL(5, 2)
+);
+
+CREATE TABLE IF NOT EXISTS subjects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    subject_name VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS teacher (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    qualifications VARCHAR(255),
+    degree VARCHAR(50),
+    experience INT,
+    address VARCHAR(255),
+    password VARCHAR(255),
+    is_approved TINYINT(1)
+);
+
+CREATE TABLE IF NOT EXISTS student_subjects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    subject_id INT,
+    teacher_id INT,
+    FOREIGN KEY (student_id) REFERENCES student(id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(id),
+    FOREIGN KEY (teacher_id) REFERENCES teacher(id)
+);
+
+CREATE TABLE IF NOT EXISTS teacher_subjects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    teacher_id INT,
+    subject_id INT,
+    FOREIGN KEY (teacher_id) REFERENCES teacher(id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(id)
+);
+
+CREATE TABLE IF NOT EXISTS subjects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    subject_name VARCHAR(100),
+    degree VARCHAR(50) -- Add this column if it's not already present
+);
+
+ALTER TABLE subjects ADD COLUMN course VARCHAR(50);
+
+INSERT INTO subjects (subject_name, course) VALUES
+('Data Structures', 'CS'),
+('Algorithms', 'CS'),
+('Database Systems', 'CS'),
+('Operating Systems', 'CS'),
+('Networks', 'CS'),
+('Software Engineering', 'CS'),
+('Artificial Intelligence', 'CS'),
+('Cyber Security', 'CS'),
+('Mechanics', 'Engineering'),
+('Thermodynamics', 'Engineering'),
+('Fluid Dynamics', 'Engineering'),
+('Control Systems', 'Engineering');
